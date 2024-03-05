@@ -8,7 +8,7 @@ public class Main {
         return input;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Converter converter = new Converter();
         String[] actions = {"+", "-", "/", "*"};
         String[] regexActions = {"\\+", "-", "/", "\\*"};
