@@ -8,7 +8,7 @@ public class Main {
         return input;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalArgumentException, IOException, NullPointerException {
         Converter converter = new Converter();
         String[] actions = {"+", "-", "/", "*"};
         String[] regexActions = {"\\+", "-", "/", "\\*"};
@@ -22,29 +22,16 @@ public class Main {
                 break;
 
             }
-            try {
                 if (actionIndex == -1) {
                     throw new IllegalArgumentException();
                 }
-            } catch (IllegalArgumentException s) {
-                System.out.println("Не верный знак операции");
-                return;
-            }
 
             String[] data = exp.split(regexActions[actionIndex]);
-            try {
             if(data.length !=2) {
                 throw new IOException();}
-            } catch(IOException e){
-                    System.out.println("Выражения должно быть два");
-                    return;
-                }
-            try {
+
                 if (converter.isRoman(data[0]) != converter.isRoman(data[1])) {
                     throw new IllegalArgumentException();}
-                } catch(IllegalArgumentException v){
-                System.out.println("Числа должны быть в одном формате!");
-            }
             if (converter.isRoman(data[0]) == converter.isRoman(data[1])) {
                 int a, b;
                 boolean isRoman = converter.isRoman(data[0]);
@@ -55,15 +42,9 @@ public class Main {
                     a = Integer.parseInt(data[0]);
                     b = Integer.parseInt(data[1]);
                 }
-
-                try {
                     if ((a > 10) || (b > 10)) {
                         throw new IOException();
                     }
-                } catch (IOException e) {
-                    System.out.println("Ошибка номер десять");
-                    return;
-                }
 
                 int result = 0;
                 switch (actions[actionIndex]) {
@@ -81,15 +62,9 @@ public class Main {
                         break;
                 }
                 if (isRoman) {
-                    try {
                         if (result <= 0) {
                             throw new NullPointerException();
                         }
-                    } catch (NullPointerException e) {
-                        System.out.println("В Риме нет отрицалельных чисел!");
-                        return;
-                    }
-
                     System.out.println(converter.intToRoman(result));
 
                 } else {
